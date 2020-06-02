@@ -97,8 +97,7 @@ function validate {
     CHART_DIR=$(download ${HELM_RELEASE} ${TMPDIR} ${HELM_VER}| tail -n1)
   else
     echo "Cloning to ${TMPDIR}"
-    clone ${HELM_RELEASE} ${TMPDIR} ${HRVAL_TARGET_BRANCH}
-    CHART_DIR=$(echo $e | tail -n1)
+    CHART_DIR=$(clone ${HELM_RELEASE} ${TMPDIR} ${HRVAL_TARGET_BRANCH} | tail -n1)
   fi
 
   HELM_RELEASE_NAME=$(yq r ${HELM_RELEASE} metadata.name)
