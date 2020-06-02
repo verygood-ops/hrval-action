@@ -60,10 +60,8 @@ function clone {
   git fetch -q origin
   if [[ "${CHART_BASE_URL}" == "${RELEASE_BASE_URL}" ]]; then
     git checkout -q ${RELEASE_GIT_REF}
-    echo "Checkout ${RELEASE_GIT_REF}"
   else
     git checkout -q ${CHART_GIT_REF}
-    echo "Checkout ${CHART_GIT_REF}"
   fi
   cd ${ORIGIN}
   echo ${2}/${CHART_PATH}
@@ -80,7 +78,7 @@ function validate {
 
   if [[ -z "${CHART_PATH}" ]]; then
     echo "Downloading to ${TMPDIR}"
-    CHART_DIR=$(download ${HELM_RELEASE} ${TMPDIR}| tail -n1)
+    CHART_DIR=$(download ${HELM_RELEASE} ${TMPDIR} ${HELM_VER}| tail -n1)
   else
     echo "Cloning to ${TMPDIR}"
     CHART_DIR=$(clone ${HELM_RELEASE} ${TMPDIR}| tail -n1)
