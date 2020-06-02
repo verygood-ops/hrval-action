@@ -45,8 +45,8 @@ function fetch {
   cd ${1}
   git init -q
   git remote add origin ${3}
-  git fetch origin
-  git checkout ${4}
+  git fetch -q origin
+  git checkout -q ${4}
   cd ${5}
   echo ${2}
 }
