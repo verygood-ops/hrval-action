@@ -71,7 +71,7 @@ function clone {
 
   if [ ! -z ${3} ]; then
     # Clone from the origin repository target branch
-    if [[ "${CHART_BASE_URL}" == "${RELEASE_BASE_URL}" ]]; then
+    if [[ "${CHART_BASE_URL}" == "${RELEASE_BASE_URL}" ]] && [[ ${GIT_REF} == "${4}" ]]; then
       fetch ${2} ${2}/${CHART_PATH} ${RELEASE_GIT_REPO} ${3} ${ORIGIN}
     else
       fetch ${2} ${2}/${CHART_PATH} ${CHART_GIT_REPO} ${GIT_REF} ${ORIGIN}
@@ -97,7 +97,7 @@ function validate {
     CHART_DIR=$(download ${HELM_RELEASE} ${TMPDIR} ${HELM_VER}| tail -n1)
   else
     echo "Cloning to ${TMPDIR}"
-    CHART_DIR=$(clone ${HELM_RELEASE} ${TMPDIR} ${HRVAL_TARGET_BRANCH} | tail -n1)
+    CHART_DIR=$(clone ${HELM_RELEASE} ${TMPDIR} ${HRVAL_BASE_BRANCH} ${HRVAL_TARGET_BRANCH} | tail -n1)
   fi
 
   HELM_RELEASE_NAME=$(yq r ${HELM_RELEASE} metadata.name)
