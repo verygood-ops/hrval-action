@@ -76,7 +76,7 @@ function clone {
   CHART_PATH=$(yq r "${1}" spec.chart.path)
 
   if [ -n "${3}" ]; then
-    if [[ "${CHART_BASE_URL}" == "${RELEASE_BASE_URL}" ]] && [[ "${GIT_REF}" == "${4}" ]]; then
+    if [[ "${GIT_REF}" == "${4}" ]]; then
       # Clone from the head repository branch/ref
       fetch "${2}" "${2}/${CHART_PATH}" "${RELEASE_GIT_REPO}" "${3}" "${ORIGIN}"
     else
@@ -138,10 +138,7 @@ function retrieve_sources {
           CHART_GIT_REPO=$(yq r "${HELM_RELEASE}" spec.chart.git)
           RELEASE_GIT_REPO=$(git remote get-url origin)
 
-          CHART_BASE_URL=$(echo "${CHART_GIT_REPO}" | sed -e 's/ssh:\/\///' -e 's/http:\/\///' -e 's/https:\/\///' -e 's/git@//' -e 's/:/\//' -e 's/\.git$//')
-          RELEASE_BASE_URL=$(echo "${RELEASE_GIT_REPO}" | sed -e 's/ssh:\/\///' -e 's/http:\/\///' -e 's/https:\/\///' -e 's/git@//' -e 's/:/\//' -e 's/\.git$//')
-
-          if [[ "${CHART_BASE_URL}" == "${RELEASE_BASE_URL}" ]] && [[ "${GIT_REF}" == "${HRVAL_BASE_BRANCH}" ]]; then
+          if [[ "${GIT_REF}" == "${HRVAL_BASE_BRANCH}" ]]; then
             # Clone from the head repository branch/ref
             CHART_LOCAL_PATH="${CACHEDIR}/${RELEASE_GIT_REPO}/${HRVAL_HEAD_BRANCH}"
           else
