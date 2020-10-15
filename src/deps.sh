@@ -11,3 +11,6 @@ helm init --client-only --kubeconfig=$HOME/.kube/kubeconfig
 
 curl -sSL https://get.helm.sh/helm-v3.1.1-linux-amd64.tar.gz | tar xz && mv linux-amd64/helm /bin/helmv3 && rm -rf linux-amd64
 helmv3 version
+
+# Add custom repositories
+helm repo add incubator https://kubernetes-charts-incubator.storage.googleapis.com/
