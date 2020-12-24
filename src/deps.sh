@@ -13,4 +13,7 @@ curl -sSL https://get.helm.sh/helm-v3.1.1-linux-amd64.tar.gz | tar xz && mv linu
 helmv3 version
 
 # Add custom repositories
-helmv3 repo add incubator https://kubernetes-charts-incubator.storage.googleapis.com/
+helmv3 repo add bitnami https://charts.bitnami.com/bitnami
+helmv3 repo add stable https://charts.helm.sh/stable
+helmv3 repo add incubator https://charts.helm.sh/incubator
+helmv3 repo add elastic https://helm.elastic.co
